@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Adaptive Font Size</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;900&amp;display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <style id="general-styles">
+        html, body {
+            height: 100vh;
+            color: white;
+            background-color: #383838;
+            margin: 0;
+        }
+        .header {
+            background-color: #1b1b1b;
+            padding: 30px;
+        }
+        .content {
+            padding: 30px;
+        }
+        h1, h2 {
+            font-weight: 900;
+        }
+        h2, p {
+            margin-bottom: 20px;
+        }
+    </style>
+
+    <style id="what-we-expect">
+        html { /*font-size: 18px;*/ }
+        h1 { /*font-size: 40px;*/ }
+        h2 { /*font-size: 30px;*/ }
+    </style>
+
+    <style id="via-two-values">
+        :root { --font-ratio: calc((100vw - 320px) / (1920 - 320)); }
+        html {  font-size: calc(14px + 4 * var(--font-ratio));      }/* 1280px = 18px; 320px = 14px */
+        h1 {    font-size: calc(24px + 16 * var(--font-ratio));     }/* 1280px = 40px; 320px = 24px */
+        h2 {    font-size: calc(20px + 10 * var(--font-ratio));     }/* 1280px = 30px; 320px = 20px */
+    </style>
+
+    <style id="via-rem" media="not all">
+        :root { --font-ratio-main: calc(4 * ((100vw - 320px) / (1920 - 320)));  }
+        html {  font-size: calc(14px + var(--font-ratio-main));                 }/* 1280px = 18px; 320px = 14px */
+        h1 {    font-size: calc(2rem + var(--font-ratio-main));                 }/* 1280px = 40px; 320px = 28px */
+        h2 {    font-size: calc(1.5rem + var(--font-ratio-main));               }/* 1280px = 31px; 320px = 21px */
+    </style>
+</head>
+<body>
+<section class="wrapper">
+    <header class="header">
+        <button
+            onclick="
+                    let styleForDefaultBehaviour = document.getElementById('via-two-values');
+                    let styleForRemBehaviour = document.getElementById('via-rem');
+                    let formulaName = document.getElementById('formula-name');
+
+                    if (styleForDefaultBehaviour.hasAttribute('media')) {
+                        styleForDefaultBehaviour.removeAttribute('media');
+                        styleForRemBehaviour.setAttribute('media', 'not all');
+                        formulaName.innerHTML = '2 Values';
+                    } else {
+                        styleForDefaultBehaviour.setAttribute('media', 'not all');
+                        styleForRemBehaviour.removeAttribute('media');
+                        formulaName.innerHTML = 'REM';
+                    }
+                    "
+        >
+            Switch Formula: "<span id="formula-name">2 Values</span>"
+        </button>
+
+        <h1>Privacy Policy</h1>
+    </header>
+
+    <main class="content">
+        <div>
+            <h2>General Provisions</h2>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.</p>
+        </div>
+
+        <div>
+            <h2>General Provisions</h2>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.</p>
+        </div>
+    </main>
+</section>
+</body>
+</html>
